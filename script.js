@@ -32,7 +32,7 @@ function selectionColor() {
     myColor[i].addEventListener('click', function () {
       myColor[i].classList.add('selected');
       for (let y = 0; y < myColor.length; y += 1) {
-        if (y != i) {
+        if (y !== i) {
           myColor[y].classList.remove('selected');
         }
       }
@@ -51,3 +51,10 @@ function paintPixel() {
 }
 selectionColor();
 paintPixel();
+
+document.getElementById('clear-board').addEventListener('click', function () {
+  let pixels = document.querySelectorAll('.pixel');
+  for (let i = 0; i < pixels.length; i += 1) {
+    pixels[i].style.backgroundColor = 'rgb(255,255,255)';
+  }
+});
