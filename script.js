@@ -3,7 +3,7 @@ function paletteColors() {
   palletDivs[0].style.backgroundColor = 'rgb(0,0,0)';
   palletDivs[0].classList.add('selected');
   for (let i = 1; i < palletDivs.length; i += 1) {
-    let r = Math.floor(Math.random() * 255);
+    let r = Math.floor(Math.random() * 254);
     let g = Math.floor(Math.random() * 255);
     let b = Math.floor(Math.random() * 255);
     palletDivs[i].style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
