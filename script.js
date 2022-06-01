@@ -10,21 +10,60 @@ function paletteColors() {
   }
 }
 
-function createSquare() {
+function createSquare(sizeSquare) {
   let pixelsSquare = document.getElementById('pixel-board');
-  for (let i = 0; i < 5; i += 1) {
-    let lineBreak = document.createElement('br');
-    pixelsSquare.appendChild(lineBreak);
-    for (let y = 0; y < 5; y += 1) {
+  for (let i = 0; i < sizeSquare; i += 1) {
+    let linePixel = document.createElement('div');
+    for (let y = 0; y < sizeSquare; y += 1) {
       let pixel = document.createElement('div');
       pixel.classList.add('pixel');
-      pixelsSquare.appendChild(pixel);
+      linePixel.appendChild(pixel);
+      pixelsSquare.appendChild(linePixel);
     }
   }
 }
 
 paletteColors();
-createSquare();
+createSquare(5);
+
+function removeSquare() {
+  let pixelsSquare = document.getElementById('pixel-board');
+  let sizeSquare = pixelsSquare.children.length;
+  for (let i = 0; i < sizeSquare; i += 1) {
+    pixelsSquare.removeChild(pixelsSquare.children[0]);
+  }
+}
+
+function limitSize() {
+  let sizeSquare = document.getElementById ('board-size');
+  if (sizeSquare.value < 5) {
+    return 5;
+  }
+  if(sizeSquare.value > 50) {
+    return 50;
+  }
+  return sizeSquare.value;
+}
+
+function definesSizeSquare() {
+  let button = document.getElementById('generate-board');
+  let sizeSquare = document.getElementById ('board-size');
+  button.addEventListener('click',function () {
+    if (sizeSquare.value === '') {
+      alert('Board inválido!');
+    } else {
+      removeSquare();
+      createSquare(limitSize());
+      selectionColor();
+      paintPixel();
+      sizeSquare.value = '';
+    }
+  });
+}
+
+
+
+definesSizeSquare();
 
 function selectionColor() {
   let myColor = document.querySelectorAll('.color');
